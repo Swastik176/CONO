@@ -19,12 +19,12 @@ data = {
     '123564':
         {
             "name": "Harshita",
-            "LastDetetctedTime" : "2023-09-23 00:00:00",
+            "LastDetectedTime" : "2023-09-23 00:00:00",
         },
     '123456':
         {
             "name": "Nihal",
-            "LastDetetctedTime" : "2023-09-23 00:00:00",
+            "LastDetectedTime" : "2023-09-23 00:00:00",
         }
 }
 
