@@ -3,7 +3,7 @@ from firebase_admin import db
 from firebase_admin import credentials
 
 print("Stablishing connection with database...")
-cred = credentials.Certificate('ServiceAccountKey.json')
+cred = credentials.Certificate('.conda/ServiceAccountKey.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://face-lock-b0fb3-default-rtdb.firebaseio.com/'
 })

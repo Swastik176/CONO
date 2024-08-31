@@ -8,7 +8,7 @@ from firebase_admin import storage
 from firebase_admin import credentials
 
 # Connecting database to upload images
-cred = credentials.Certificate('ServiceAccountKey.json')
+cred = credentials.Certificate('.conda/ServiceAccountKey.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://face-lock-b0fb3-default-rtdb.firebaseio.com/',
     'storageBucket': 'face-lock-b0fb3.appspot.com'
