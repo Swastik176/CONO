@@ -10,7 +10,7 @@ from face_detect import faceDetect
 recognizer = sr.Recognizer()
 
 # Set verification state and other variables
-verification_state = 'name'
+verification_state = 'face'
 max_attempts = 3
 attempts = 0
 
@@ -34,7 +34,6 @@ def speak(text, display=True):
 
 def start_recognition():
     global verification_state
-    verification_state = 'face'
     while verification_state != 'done':
         if verification_state == 'face':
             try:
@@ -48,6 +47,7 @@ def start_recognition():
                     verification_state = 'face'
             except Exception as e:
                 speak(f"An error occurred during face recognition: {str(e)}")
+                break
                 verification_state = 'face'
 
 def cono_will_wish():

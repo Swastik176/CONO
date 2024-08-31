@@ -54,6 +54,7 @@ def faceDetect():
     session = 0
     matched = False
     modechanger = 0
+
     while True:
         session += 1
         success, img = cap.read()
@@ -138,13 +139,13 @@ def faceDetect():
             break
         cv2.imshow("Face Lock", imgbackground)
         if cv2.waitKey(1) == 27: break
-        
+
     cap.release()
     cv2.destroyAllWindows()
     if(found):
         return userInfo['name']
-    
-    return None
+    return -1
 
 if __name__ == "__main__":
     name = faceDetect()
+    print(name)
