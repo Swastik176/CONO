@@ -11,7 +11,7 @@ from firebase_admin import storage
 from firebase_admin import credentials
 
 # Connecting database to upload images
-cred = credentials.Certificate('.conda/ServiceAccountKey.json')
+cred = credentials.Certificate('.conda\ServiceAccountKey.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://face-lock-b0fb3-default-rtdb.firebaseio.com/',
     'storageBucket': 'face-lock-b0fb3.appspot.com'
@@ -80,10 +80,10 @@ def faceDetect():
                 if matches[matchIndex]:
                     matched = True
                     counter += 1
-                    y1, x2, y2, x1 = faceLoc
-                    y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
-                    bbox = 50 + x1, 143 + y1, x2 - x1, y2 - y1
-                    imgbackground = cvzone.cornerRect(imgbackground, bbox, rt=0)
+                    # y1, x2, y2, x1 = faceLoc
+                    # y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+                    # bbox = 50 + x1, 143 + y1, x2 - x1, y2 - y1
+                    # imgbackground = cvzone.cornerRect(imgbackground, bbox, rt=0)
                     modechanger = 1
                     
                     id = userids[matchIndex]

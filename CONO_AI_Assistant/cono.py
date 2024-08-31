@@ -1,10 +1,10 @@
-import requests
-import speech_recognition as sr
-from gtts import gTTS
-import pygame
 import os
-from face_detect import faceDetect
+import pygame
+import requests
+from gtts import gTTS
 from datetime import datetime
+import speech_recognition as sr
+from face_detect import faceDetect
 
 # Initialize the recognizer
 recognizer = sr.Recognizer()
@@ -72,6 +72,10 @@ def fetch_openai_response(prompt):
     except requests.exceptions.RequestException:
         return "I'm having trouble connecting to the server right now."
 
-# Initial prompt to start the interaction
-speak("  Hey, I'm CONO... i'm booting your devices camera please look into it for authentication...")
-start_recognition()
+def initiate_cono():
+    # Initial prompt to start the interaction
+    speak("  Hey, I'm CONO... i'm booting your devices camera please look into it for authentication...")
+    start_recognition()
+
+if __name__ == "__main__":
+    initiate_cono()
