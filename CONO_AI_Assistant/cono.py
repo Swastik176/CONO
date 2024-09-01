@@ -4,9 +4,6 @@ from datetime import datetime
 import speech_recognition as sr
 from face_detect import faceDetect
 
-# Initialize the recognizer
-recognizer = sr.Recognizer()
-
 # Set verification state and other variables
 verification_state = 'face'
 max_attempts = 3
@@ -45,6 +42,9 @@ def start_recognition():
                 break
 
 def listen():
+    # Initialize the recognizer
+    recognizer = sr.Recognizer()
+
     with sr.Microphone() as source:
         print("Listening...")
         recognizer.adjust_for_ambient_noise(source, duration=0.5)
