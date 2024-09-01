@@ -1,7 +1,5 @@
-import os
-import pygame
+import pyttsx3
 import requests
-from gtts import gTTS
 from datetime import datetime
 import speech_recognition as sr
 from face_detect import faceDetect
@@ -14,26 +12,23 @@ verification_state = 'face'
 max_attempts = 3
 attempts = 0
 
+# function to make her speak
 def speak(text, display=True):
     if display:
         print("CONO: " + text)
-    tts = gTTS(text=text, lang='en', slow=False)
-    filename = "voice.mp3"
-    tts.save(filename)
-    
-    # Initialize pygame and play the audio
-    pygame.mixer.init()
-    pygame.mixer.music.load(filename)
-    pygame.mixer.music.play()
-    
-    while pygame.mixer.music.get_busy():  # Wait until the audio finishes playing
-        continue
 
-    pygame.mixer.music.unload()
-    os.remove(filename)
+    engine = pyttsx3.init("sapi5")
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)
+    engine.setProperty('rate', 174)
+    engine.say(text)
+    engine.runAndWait()
+
 
 def start_recognition():
     global verification_state
+
+    # Face Lock
     while verification_state != 'done':
         if verification_state == 'face':
             try:
@@ -48,7 +43,20 @@ def start_recognition():
             except Exception as e:
                 speak(f"An error occurred during face recognition: {str(e)}")
                 break
-                verification_state = 'face'
+
+def listen():
+    with sr.Microphone() as source:
+        print("Listening...")
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        audio = recognizer.listen(source)
+        try:
+            transcript = recognizer.recognize_google(audio).lower()
+            print(f"Recognized: {transcript}")
+        except sr.UnknownValueError:
+            speak("Sorry, I didn't catch that. Could you please repeat?", display=True)
+        except sr.RequestError:
+            speak("There seems to be a network issue. Please try again later.", display=True)
+
 
 def cono_will_wish():
     hour = datetime.now().hour
@@ -62,7 +70,7 @@ def cono_will_wish():
     speak(greeting)
     speak("I'm CONO, your AI assistant. How can I assist you today?")
     speak("Do you wanna listen music, watch youtube or send a message to your friend....")
-
+    listen()
 
 def fetch_openai_response(prompt):
     try:
