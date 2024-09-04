@@ -58,16 +58,16 @@ def listen_and_understand():
         transcript = listen()
         if "open" in transcript:
             open_app(transcript)
+
         elif "on youtube" in transcript:
             play_yt(transcript)
+
         elif "send message" in transcript or "phone call" in transcript or "video call" in transcript:
             from helper import findContact
             type = ""
             msg = None
             contactName, mobileNo = findContact(transcript)
-            
             if contactName != 0:
-
                 if "send message" in transcript:
                     type = "message"
                     speak("what message you want to send")
@@ -77,19 +77,34 @@ def listen_and_understand():
                 else:
                     type = "video call"
                 whatsapp(contactName, mobileNo, type, msg)
+
         elif "who are you" in transcript or 'hu r u' in transcript:
             speak("I'm an artificial intelligence model known as CONO. CONO stands for 'Command On New Operator.'")
+
         elif "what is your name" in transcript:
             speak("My name is CONO, your personal Ai assistant")
+
+        elif "today's date" in transcript:
+            speak("Today's date is: " + str(datetime.today()))
+
+        elif "day is today" in transcript:
+            speak("Today's Day is: " + str(datetime.now().strftime('%A')))
+
+        elif "current time" in transcript:
+            speak("Current time is: " + str(datetime.now().strftime("%H:%M:%S")))
+
         elif "stop" in transcript or "exit" in transcript:
             os._exit(0)
+
         else:
             chatBot(transcript)
+
     except  Exception as e:
         print("Error Occurred, while listening")
         print(e)
-    # finally:
-    #     start_recognition()
+
+    finally:
+        start_recognition()
 
 # helper function for listen_and_understand(), helps to listen
 def listen():
@@ -131,4 +146,3 @@ def initiate_cono():
 
 if __name__ == "__main__":
     initiate_cono()
-    # listen_and_understand()
