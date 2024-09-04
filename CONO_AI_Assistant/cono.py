@@ -10,6 +10,7 @@ verification_state = 'face'
 max_attempts = 3
 attempts = 0
 
+# starts face recognition and detects hot word
 def start_recognition():
     global verification_state
 
@@ -109,6 +110,7 @@ def listen():
             speak("There seems to be a network issue. Please try again later.", display=True)
     return transcript
 
+# function to wish 
 def cono_will_wish():
     hour = datetime.now().hour
     if hour > 4 and hour < 12:
@@ -121,6 +123,7 @@ def cono_will_wish():
     speak("I'm CONO, your AI assistant. How can I assist you today?")
     listen_and_understand()
 
+# initializer
 def initiate_cono():
     # Initial prompt to start the interaction
     speak("Hey, I'm CONO... i'm booting your devices camera please look into it for authentication...")
