@@ -25,7 +25,17 @@ data = {
         {
             "name": "Nihal",
             "LastDetectedTime" : "2023-09-23 00:00:00",
-        }
+        },
+    '123489':
+        {
+            "name": "Nitya",
+            "LastDetectedTime" : "2023-09-23 00:00:00",
+        },
+    '123789':
+        {
+            "name": "Saksham",
+            "LastDetectedTime" : "2023-09-23 00:00:00",
+        },
 }
 
 # Uploading the data in firebase
