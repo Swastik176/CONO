@@ -84,13 +84,13 @@ def listen_and_understand():
         elif "what is your name" in transcript:
             speak("My name is CONO, your personal Ai assistant")
 
-        elif "today's date" in transcript:
-            speak("Today's date is: " + str(datetime.today()))
+        elif "today's date" in transcript or "current date" in transcript:
+            speak("Today's date is: " + str(datetime.today().strftime("%B %d, %Y")))
 
-        elif "day is today" in transcript:
+        elif "day is today" in transcript or "current day" in transcript:
             speak("Today's Day is: " + str(datetime.now().strftime('%A')))
 
-        elif "current time" in transcript:
+        elif "current time" in transcript or "time right now" in transcript:
             speak("Current time is: " + str(datetime.now().strftime("%H:%M:%S")))
 
         elif "stop" in transcript or "exit" in transcript:
