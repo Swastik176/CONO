@@ -70,28 +70,31 @@ def PlayYoutube(query):
     
 
 def hotword():
-    porcupine=None
-    paud=None
-    audio_stream=None
+    porcupine = None
+    paud = None
+    audio_stream = None
     try:
-    
-        # pre trained keywords    
-        porcupine=pvporcupine.create(keywords=["jarvis","alexa"]) 
-        paud=pyaudio.PyAudio()
-        audio_stream=paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
-        
-        # loop for streaming
+        accessKey = "f9k5WcPdmiQLC9bpKAcpViE2/aH/yw6wt0iUIJmDy5l+mbfrtMyytQ=="
+        # Load the custom wake word model for "hey Cono"
+        porcupine = pvporcupine.create(access_key=accessKey, keyword_paths=["./Hey_cono/hey_cono.ppn"])
+
+        paud = pyaudio.PyAudio()
+        audio_stream = paud.open(rate=porcupine.sample_rate, 
+                                 channels=1, 
+                                 format=pyaudio.paInt16, 
+                                 input=True, 
+                                 frames_per_buffer=porcupine.frame_length)
+
+        # print("Listening for 'Hey Cono'...")
         while True:
-            keyword=audio_stream.read(porcupine.frame_length)
-            keyword=struct.unpack_from("h"*porcupine.frame_length,keyword)
+            pcm = audio_stream.read(porcupine.frame_length)
+            pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
 
-            # processing keyword comes from mic 
-            keyword_index=porcupine.process(keyword)
+            # Process the audio and check for hotword detection
+            keyword_index = porcupine.process(pcm)
 
-            # checking first keyword detetcted for not
-            if keyword_index>=0:
-                print("hotword detected")
-
+            if keyword_index >= 0:
+                print("Hotword 'Hey Cono' detected!")
                 # pressing shorcut key win+j
                 import pyautogui as autogui
                 autogui.keyDown("win")
@@ -99,7 +102,9 @@ def hotword():
                 time.sleep(2)
                 autogui.keyUp("win")
                 
-    except:
+    except Exception as e:
+        print(f"Error occurred: {e}")
+    finally:
         if porcupine is not None:
             porcupine.delete()
         if audio_stream is not None:
